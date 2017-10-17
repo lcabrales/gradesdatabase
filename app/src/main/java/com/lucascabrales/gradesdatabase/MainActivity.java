@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.lucascabrales.gradesdatabase.adapters.GradesAdapter;
+import com.lucascabrales.gradesdatabase.data.StorageManager;
 import com.lucascabrales.gradesdatabase.models.Grade;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private ArrayList<Grade> mDataset;
     private GradesAdapter mAdapter;
     private AlertDialog mDialog;
-    private String[] spinnerData;
+    private ArrayList<String> mSpinnerData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,23 +44,27 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void setupSpinner() {
         final Spinner spinner = (Spinner) findViewById(R.id.sp_order);
 
-        spinnerData = new String[]{
-                SUBJECT,
-                YEAR,
-                GRADE,
-                EXAM
-        };
+        mSpinnerData = new ArrayList<>();
+        mSpinnerData.add(SUBJECT);
+        mSpinnerData.add(YEAR);
+        mSpinnerData.add(GRADE);
+        mSpinnerData.add(EXAM);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, spinnerData);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, mSpinnerData);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
 
+        String defaultOrderBy = StorageManager.getOrderBy();
+        spinner.setSelection(mSpinnerData.indexOf(defaultOrderBy));
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                mDataset = Grade.getList(spinnerData[i]);
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                mDataset = Grade.getList(mSpinnerData.get(position));
                 mAdapter.setData(mDataset);
+
+                StorageManager.setOrderBy(mSpinnerData.get(position));
             }
 
             @Override

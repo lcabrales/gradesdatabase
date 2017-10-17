@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.lucascabrales.gradesdatabase.MainActivity;
+
 /**
  * Created by lucascabrales on 10/16/17.
  */
@@ -11,7 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 public enum StorageManager {
     INSTANCE;
     private static final String DEFAULT_PREFS = "SP_DEFAULT";
-    private static final String VALUE = "SP_VALUE";
+    private static final String ORDER_BY = "SP_ORDER_BY";
 
     private Context mContext;
     private SharedPreferences mSettings;
@@ -54,13 +56,13 @@ public enum StorageManager {
         editor.apply();
     }
 
-    public static void setValue(String ip) {
+    public static void setOrderBy(String value) {
         SharedPreferences.Editor editor = INSTANCE.getSetting().edit();
-        editor.putString(VALUE, ip);
+        editor.putString(ORDER_BY, value);
         editor.apply();
     }
 
-    public static String getValue() {
-        return INSTANCE.getSetting().getString(VALUE, "");
+    public static String getOrderBy() {
+        return INSTANCE.getSetting().getString(ORDER_BY, MainActivity.SUBJECT);
     }
 }

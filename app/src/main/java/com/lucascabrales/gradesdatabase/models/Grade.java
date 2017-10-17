@@ -93,7 +93,7 @@ public class Grade implements Parcelable {
     }
 
     public static ArrayList<Grade> getList() {
-        return getList(MainActivity.SUBJECT);
+        return getList(StorageManager.getOrderBy());
     }
 
     public static ArrayList<Grade> getList(String orderBy) {
@@ -110,7 +110,7 @@ public class Grade implements Parcelable {
                 orderBy = "grade";
                 break;
             case MainActivity.EXAM:
-                orderBy = "exam";
+                orderBy = "exam asc";
                 break;
         }
 
