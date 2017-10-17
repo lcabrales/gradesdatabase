@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/et_subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Asignatura"
+        android:inputType="textCapSentences" />
+
+    <EditText
+        android:id="@+id/et_year"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Año"
+        android:inputType="number"
+        android:maxLength="4" />
+
+    <EditText
+        android:id="@+id/et_grade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nota"
+        android:inputType="textCapCharacters"
+        android:maxLength="1" />
+
+    <EditText
+        android:id="@+id/et_exam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Examen Final"
+        android:inputType="number"
+        android:maxLength="3" />
+</LinearLayout>
